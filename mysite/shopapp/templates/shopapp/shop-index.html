@@ -4,7 +4,17 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Hello Shop Index!</h1>
+    <h1>
+        {% for key, value in colors.items %}
+            {% if key == 'green' %}
+            <p style="color:{{ value }}">
+                Hello Shop Index!
+            </p>
+            {% endif %}
+        {% endfor %}
+
+
+    </h1>
      <div>
          <ul>
              {% for name, price in products %}
