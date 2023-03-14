@@ -1,0 +1,4 @@
+Команды
+python -m django startproject mysite
+python manage.py startapp shopapp
+python manage.py startapp requestdataapp
