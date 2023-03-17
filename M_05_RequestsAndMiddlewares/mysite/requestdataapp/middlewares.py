@@ -1,4 +1,6 @@
 from django.http import HttpRequest
+import time
+from django.shortcuts import render
 
 
 def set_useragent_on_request_middleware(get_response):
@@ -16,12 +18,25 @@ class CountRequestMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
         self.requests_count = 0
+        self.request_time = {}
         self.responses_count = 0
         self.exceptions_count = 0
 
     def __call__(self, request: HttpRequest):
+        time_delay = 10
+        if not self.request_time:
+            print('Это первый request после перезапуска сервера, словарь еще пуст!')
+        else:
+            if (round(time.time()) * 1) - self.request_time['time'] < time_delay \
+                    and self.request_time['ip_address'] == request.META.get('REMOTE_ADDR'):
+                print('Прошло меньше 10 секунд для повторного запроса с вашего ip-адреса!')
+                return render(request, 'requestdataapp/error-request.html')
+
+        self.request_time = {'time': round(time.time()) * 1, 'ip_address': request.META.get('REMOTE_ADDR')}
+
         self.requests_count += 1
         print("requests count", self.requests_count)
+
         response = self.get_response(request)
         self.responses_count += 1
         print("responses count", self.responses_count)

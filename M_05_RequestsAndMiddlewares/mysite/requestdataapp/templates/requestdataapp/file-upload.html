@@ -6,9 +6,11 @@
 
 {% block body %}
   <h1>File upload</h1>
+
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p>
+      <label><b>Можно загрузить файл объемом не более 1 мегабайта!</b></label><br><br>
       <input type="file" name="myfile">
     </p>
     <button type="submit">Upload</button>
