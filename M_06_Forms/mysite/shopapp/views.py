@@ -27,11 +27,14 @@ def groups_list(request: HttpRequest):
     }
     return render(request, 'shopapp/groups-list.html', context=context)
 
+
 def create_product(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
-            Product.objects.create(**form.cleaned_data)
+            # name = form.cleaned_data["name"]
+            # Product.objects.create(**form.cleaned_data)
+            form.save()
             url = reverse("shopapp:products_list")
             return redirect(url)
     else:

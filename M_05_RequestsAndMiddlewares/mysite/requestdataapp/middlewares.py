@@ -5,12 +5,14 @@ from django.shortcuts import render
 
 def set_useragent_on_request_middleware(get_response):
     print("initial call")
+
     def middleware(request: HttpRequest):
         print("before get response")
         request.user_agent = request.META["HTTP_USER_AGENT"]
         response = get_response(request)
         print("after get response")
         return response
+
     return middleware
 
 
@@ -21,6 +23,7 @@ class CountRequestMiddleware:
         self.request_time = {}
         self.responses_count = 0
         self.exceptions_count = 0
+        self.remote_addr = ''
 
     def __call__(self, request: HttpRequest):
         time_delay = 10
@@ -35,6 +38,7 @@ class CountRequestMiddleware:
         self.request_time = {'time': round(time.time()) * 1, 'ip_address': request.META.get('REMOTE_ADDR')}
 
         self.requests_count += 1
+        self.remote_addr = request.META.get('REMOTE_ADDR')
         print("requests count", self.requests_count)
 
         response = self.get_response(request)
