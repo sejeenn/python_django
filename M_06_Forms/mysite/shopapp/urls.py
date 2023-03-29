@@ -8,7 +8,7 @@ urlpatterns = [
     path("", shop_index, name="index"),
     path("groups/", groups_list, name="groups_list"),
     path("products/", products_list, name="products_list"),
-    path("products/create", create_product, name="product_create"),
+    path("products/create/", create_product, name="product_create"),
     path("orders/", orders_list, name="orders_list"),
-    path("orders/create", create_order, name="order_create"),
+    path("orders/create/", create_order, name="order_create"),
 ]
