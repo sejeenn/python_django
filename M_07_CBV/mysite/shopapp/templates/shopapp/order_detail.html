@@ -19,10 +19,10 @@
                 <li>{{ product.name }} for ${{ product.price }}</li>
               {% endfor %}
 
-            </ul>
-          </div>
-
-<div>
-  <a href="{% url 'shopapp:orders_list' %}">Back to orders list</a>
+            </ul></div>
 </div>
+<div><a href="{% url 'shopapp:order_update' pk=order.pk%}">Update order </a></div>
+<div><a href="{% url 'shopapp:order_delete' pk=order.pk%}">Delete order </a></div>
+<br>
+<div><a href="{% url 'shopapp:orders_list' %}">Back to orders list</a></div>
 {% endblock %}
