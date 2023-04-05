@@ -18,7 +18,7 @@ class Command(BaseCommand):
         group.permissions.add(permission_profile)
 
         # связать пользователя напрямую с разрешением
-        user.user_permission.add(permission_logentry)
+        user.user_permissions.add(permission_logentry)
 
         group.save()
         user.save()
