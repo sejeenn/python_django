@@ -17,4 +17,7 @@
   {% else %}
     <h2>User is anonymous</h2>
   {% endif %}
+<div>
+  <a href="{% url 'myauth:logout' %}">Logout </a>
+</div>
 {% endblock %}
